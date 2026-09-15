@@ -10,6 +10,7 @@ x0_cartesian = [1; 0; 0; 0];
 [t_polar, x_polar] = ode45(@pendulum_polar,[0 Tfinal],x0_polar);
 
 [t_cartesian, x_cartesian] = ode45(@pendulum_cartesian,[0 Tfinal],x0_cartesian);
+%[t_cartesian, x_cartesian] = ode45(@pendulum_cartesian_pd,[0 Tfinal],x0_cartesian);
 
 figure(1)
 plot(t_polar, x_polar(:,1), LineWidth=2)
