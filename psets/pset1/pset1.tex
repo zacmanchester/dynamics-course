@@ -70,7 +70,15 @@
 
 \noindent We'll be analyzing an inverted pendulum with a massless rod of length $\ell$, a point mass $m$ attached at the tip, and a torsion spring of stiffness $k$ mounted at the pivot. The spring is uncompressed when the rod is exactly vertical. Let $\theta$ be the angle measured from the upward vertical line, positive in the direction shown in the figure.
 
-Derive the nonlinear equation of motion for this inverted pendulum using Newton's 2nd law as we did in class. Leave it in terms of the constants shown in the diagram for now --- we'll plug in numerical values later.
+Derive the nonlinear equation of motion for this inverted pendulum using Newton's 2nd law as we did in class. Leave it in terms of the constants shown in the diagram for now --- we'll plug in numerical values later. \textbf{Update:} Here are some hints and suggested steps:
+
+\begin{enumerate}[label=(\alph*)]
+\item First, write down $\vec{F}=m\vec{a}$ as we did in class for the standard pendulum and be careful to check the sign of the gravitational force for consistency with the diagram above.
+\item Next, figure out how to express the force on the mass due to the torsion spring. Torsion springs exert a torque proportional to angular displacement ($\tau = -k \theta$). You can convert this to a force in either Cartesian or polar coordinates, but polar is easier since the force will always point in the $\hat{\theta}$ direction.
+\item Recall that $\vec{\tau} = \vec{r} \times \vec{F}$, where $\vec{r}$ is the vector pointing from the center of rotation to the point where the force $\vec{F}$ is applied. In general, knowing $\vec{r}$ and $\vec{\tau}$, this expression is not invertible to uniquely solve for $\vec{F}$ (why?). However, in this particular problem, it is possible (why?).
+\item Finally, express each term in the equation of motion in polar coordinates and simplify the expression to something like what we had in class, plus an extra term due to the torsion spring.
+\end{enumerate}
+
 
 \section{Linearization and Stability}
 
