@@ -42,11 +42,10 @@ This course is about modeling and simulating mechanical systems, starting with a
 
 \begin{itemize}
 	\item Lectures will be held \textbf{Tuesdays and Thursdays 11:00--12:30 in 35-225}. Lectures will also be recorded for later viewing.
-	\item Recitations will be held \textbf{Fridays 3:00--4:00 in 35-225}.
-	\item Labs will be held during three of these recitation sessions
-	\item Office hours will be \todo{TBD}.
-	\item Homework assignments will be due \textbf{Fridays by 11:59 PM}.
-	\item There will be occasional short (5 minute) quizzes given in class.
+	\item Recitations will be held \textbf{Fridays 3:00--4:00 in 35-225}. These will primarily be used for office hours, but three of these times will be used for labs.
+	\item Office hours will be \textbf{Tuesdays 4:00--5:00 in 31-201M} (location may change in the future).
+	\item Homework assignments will be due \textbf{Fridays by 11:59 PM} most weeks.
+	\item There will be a short (5 minute) quiz in class corresponding to each homework assignment. Quizzes will be in class on the Tuesday after the correspoding homeowork deadline.
 	\item There will be an in-class mid-term exam and a cumulative final exam.
 	\item Piazza will be used for general discussion and Q\&A outside of class and office hours.
 \end{itemize}
@@ -105,67 +104,85 @@ Students can earn a full participation grade through any combination of office h
 
 \textbf{Late Assignments:} Students are allowed a budget of six late days for turning in homework with no penalty throughout the semester. They may be used together on one assignment, or separately across multiple assignments. Beyond these six days, no other late homework will be accepted.
 
+\noindent\textbf{Quiz Grades:} The lowest quiz grade will be dropped from each student's semester cumulative grade. This can also be used to cover an absence.
+
 \noindent \textbf{Collaboration:} Students are encouraged to collaborate on labs and homework assignments, but each student must turn in their own assignment by the deadline.
 
 \noindent \textbf{AI Use:} Students are permitted to use AI tools like Claude and Gemini for assistance on homework assignments. This should be acknowledged explicitly with a brief statement about how AI was used.
 
 \section*{Tentative Schedule}
 
-\begin{tabular}{c|c|c|c}
-	Week & Dates & Topics & Assignments \\
+\begin{tabular}{c|c|c}
+	Week & Dates & Topics \\
 	\hline
 	\multirow{2}{*}{1} & Sep 10 & 
-        Course Overview, History, and Review & Survey \\
-	 &  &  &  \\
+        Course Overview, History, and Review \\
+	 	&  & \\
 	\hline
 	\multirow{2}{*}{2} & Sep 15 &
-        Coordinates and Reference Frames &  \\
-	 & Sep 17 & Momentum, Energy, and Conservation & HW1 Out \\
+        Coordinates and Newtonian Mechanics Review \\
+	 	& Sep 17 &
+	 	State Space, Numerical Integration, Energy, and Lyapunov Stability \\
 	\hline
 	\multirow{2}{*}{3} & Sep 22 &
-        Euler-Lagrange Equations &  \\
-	 & Sep 24 & Potential Functions, Non-Conservative Forces &  \\
+        Work, d'Alembert's Principle, Euler-Lagrange Equation \\
+	 	& Sep 24 &
+	 	Manipulator Equation, Mass Matrix \\
 	\hline
 	\multirow{2}{*}{4}  & Sep 29 &
-        Simulation and Runge-Kutta & HW1 Due \\
-	 & Oct 1 & Constraints and Lagrange Multipliers & HW2 Out \\
+        Dynamics in Rotating Frames \\
+	 	& Oct 1 &
+	 	Linear and Angular Momentum, Rigid Bodies \\
 	\hline
-	\multirow{2}{*}{5}  & Oct 6 & Orbit Mechanics 1 &  \\
-	 & Oct 8 & Orbit Mechanics 2 &  \\
+	\multirow{2}{*}{5}  & Oct 6 &
+		Attitude Kinematics, Rotation Matrices \\
+	 	& Oct 8 &
+	 	Quaternions and Simulation \\
 	\hline
-	\multirow{2}{*}{6}  & Oct 13 & \textcolor{red}{No Class --- Monday Schedule} & HW2 Due \\
-	 & Oct 15 & Rigid Bodies and Attitude & HW3 Out \\
+	\multirow{2}{*}{6}  & Oct 13 &
+		\textcolor{red}{No Class --- Monday Schedule} \\
+	 	& Oct 15 &
+	 	Euler's Equation, Equilibria \\
 	\hline
-	\multirow{2}{*}{7}  & Oct 20 & Rotation Matrices and Quaternions 
-         &  \\
-	 & Oct 22 & Euler's Equation & \\
+	\multirow{2}{*}{7}  & Oct 20 &
+		Linearization and Stability, Spinning Spacecraft \\
+	 	& Oct 22 &
+	 	Newton-Euler Dynamics for Aircraft \\
 	\hline
-	\multirow{2}{*}{8}  & Oct 27 & 
-        Newton-Euler Dynamics for Aircraft & \\
-	 & Oct 29 & \textbf{Mid-Term Exam} \textcolor{red}{(Zac Out)} &   \\
+	\multirow{2}{*}{8}  & Oct 27 &
+		Mid-Term Review \\
+	 	& Oct 29 &
+	 	\textbf{Mid-Term Exam} \textcolor{red}{(Zac Out)} \\
 	\hline
-	\multirow{2}{*}{9}  & Nov 3 & Linearization and Stability \textcolor{red}{(Zac Out)}         &  \\
-	 & Nov 5 & Linear Dynamical Systems and Modes \textcolor{red}{(Zac Out)} &  \\
+	\multirow{2}{*}{9}  & Nov 3 &
+		Intrinsic Coordinates and Frenet-Serret \textcolor{red}{(Zac Out)} \\
+	 	& Nov 5 &
+	 	TBD \textcolor{red}{(Zac Out)} \\
 	\hline
-	\multirow{2}{*}{10}  & Nov 10 & Vector Fields and Phase Portraits
-         & HW3 Due \\
-	 & Nov 12 & Coulomb Friction and the Maximum Dissipation Principle & HW4 Out  \\
+	\multirow{2}{*}{10}  & Nov 10 &
+		Gravitational Potential, The Kepler Problem \\
+	 	& Nov 12 &
+	 	Orbital Elements, Perturbations, The J2 Effect \\
 	 \hline
-	\multirow{2}{*}{11}  & Nov 17 & 3D Multi-Body Dynamics Simulation
-         &  \\
-	 & Nov 19 & Constraint Stabilization &   \\
+	\multirow{2}{*}{11}  & Nov 17 &
+		Orbital Transfers \\
+	 	& Nov 19 &
+		The Circular Restricted Three-Body Problem, Equilibria and Stability \\
 	 \hline
-	\multirow{2}{*}{12}  & Nov 24 & System Identification and Least-Squares
-         &  HW4 Due \\
-	 & Nov 26 & \textcolor{red}{No Class --- Thanksgiving} & HW5 Out  \\
+	\multirow{2}{*}{12}  & Nov 24 &
+		3D Multi-Body Dynamics and Simulation \\
+	 	& Nov 26 &
+	 	\textcolor{red}{No Class --- Thanksgiving} \\
 	 \hline
-	\multirow{2}{*}{13}  & Dec 1 & TBD: Schedule Margin
-         &  \\
-	 & Dec 3 &  &   \\
+	\multirow{2}{*}{13}  & Dec 1 &
+		Constraints, Lagrange Multipliers, and Constraint Stabilization \\
+	 	& Dec 3 &
+	 	Coulomb Friction and the Maximum Dissipation Principle \\
 	 \hline
-	\multirow{2}{*}{14}  & Dec 8 & TBD: Schedule Margin
-         & HW5 Due \\
-	 & Dec 10 &  &   \\
+	\multirow{2}{*}{14}  & Dec 8 &
+		System Identification and Least-Squares \\
+	 	& Dec 10 &
+	 	TBD: Schedule Margin\\
 
 \end{tabular}
 
