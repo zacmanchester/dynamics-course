@@ -8,7 +8,7 @@
 \usetikzlibrary{decorations.pathmorphing, decorations.pathreplacing, calc}
 
 \title{16.07 Dynamics Problem Set 1}
-\author{Due Friday, September 25}
+\author{Due Tuesday, September 29}
 \date{}
 
 \begin{document}
@@ -105,7 +105,7 @@ Linearize the equation of motion from Section 1 for small $\theta$ using the sma
     \end{itemize}
     \item Equilibria are points where, if initialized at rest, the system will remain at rest (i.e. all forces sum to zero). What does this correspond to on your plots of $U(\theta)$? Identify and mark all equilibria on your three plots.
     \item Given what we already know about stability from our linear analysis, how can you determine stability from the potential $U(\theta)$? Indicate the stability of each equilibrium point graphically on your plots via color coding or using different marker styles.
-    \item \textbf{Pay particular attention to the case $k = k_{cr}$.} Your natural-frequency expression from Section 3 gives $\omega_n = 0$ in this case --- by itself, this does \textbf{not} tell you whether $\theta = 0$ is stable or unstable. Using the shape of $U(\theta)$ near $\theta = 0$, what can you say about the true nonlinear stability of the upright equilibrium when $k = k_{cr}$? Explain in a sentence or two why the linearized analysis from Section 3 is insufficient to answer this question.
+    \item \textbf{Pay particular attention to the case $k = k_{cr}$.} Your natural-frequency expression from Section 2 gives $\omega_n = 0$ in this case --- by itself, this does \textbf{not} tell you whether $\theta = 0$ is stable or unstable. Using the shape of $U(\theta)$ near $\theta = 0$, what can you say about the true nonlinear stability of the upright equilibrium when $k = k_{cr}$? Explain in a sentence or two why the linearized analysis from Section 3 is insufficient to answer this question.
 \end{enumerate}
 
 \section{Numerical Simulation}
@@ -113,9 +113,9 @@ Linearize the equation of motion from Section 1 for small $\theta$ using the sma
 For each of the three values of $k$ from Section 4, numerically integrate the full nonlinear dynamics from Section 1 using \texttt{ode45} (MATLAB) or \texttt{scipy.integrate.solve\_ivp} (Python).
 
 \begin{enumerate}[label=(\alph*)]
-    \item For each $k$, run a batch of simulations (e.g., $\approx$20 runs) starting from the upright equilibrium with zero initial angular velocity ($\dot\theta(0) = 0$) and $\theta(0)$ drawn from a uniform distribution over a suitable range (e.g., $\theta(0) \sim U(-3,3)$ rad). Integrate each simulation long enough to see its long-term behavior clearly.
+    \item For each $k$, run a batch of simulations (e.g., $\approx$20 runs) starting with zero initial angular velocity ($\dot\theta(0) = 0$) and $\theta(0)$ drawn from a uniform distribution over a suitable range (e.g., $\theta(0) \sim U(-3,3)$ rad). Integrate each simulation long enough to see its long-term behavior clearly.
     \item For each value of $k$, plot all trajectories together on a single phase-plane plot ($\theta$ on the horizontal axis, $\dot\theta$ on the vertical axis). Verify and comment on your stability analysis for the case $k=k_{cr}$.
-    \item A basin of attraction is the region of state space around a stable equilibrium point within which trajectories converge to the equilibrium. The dividing line between two basins is called a \emph{separatrix}. Identify and mark the separatrix on your phase plot for the $k = 0.5\,k_{cr}$ case. \emph{Hint:} The separatrix is actually a trajectory of the system, so you can identify appropriate initial conditions and simulate it to plot it. Verify that no trajectories cross this line.
+    \item A basin of attraction is the region of state space around a stable equilibrium point within which trajectories converge to the equilibrium. The dividing line between two basins is called a \emph{separatrix}. While, strictly speaking, we don't have basins of attraction in this system because there is no damping, we can still identify a separatrix that divides the state space into regions of bounded oscillations. Identify and mark the separatrix on your phase plot for the $k = 0.5\,k_{cr}$ case. \emph{Hint:} The separatrix is actually a trajectory of the system, so you can identify appropriate initial conditions and simulate it to plot it. Verify that no trajectories cross this curve.
 \end{enumerate}
 
 \end{document}
