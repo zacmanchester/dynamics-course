@@ -1,0 +1,59 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=0.6in]{geometry}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\newcommand{\ans}[1]{\par\vspace{6pt}{\color{blue!60!black}#1}}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing, decorations.pathreplacing, calc, arrows.meta}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\begin{center}
+    {\Large \textbf{16.07 Dynamics --- Quiz 2: Foucault's Pendulum (Solutions)}}
+\end{center}
+
+\vspace{4pt}
+
+
+
+\vspace{14pt}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*, itemsep=4pt, series=quiz]
+\item What is the precession period of a Foucault pendulum placed at the North Pole? State your answer in sidereal days.
+\ans{The swing plane precesses at $\dot\psi = -\Omega\sin\lambda$, so the precession period is $T_{\text{prec}} = 2\pi/(\Omega\sin\lambda)$. At the North Pole, $\sin 90^\circ = 1$, so
+\[
+T_{\text{prec}} = \frac{2\pi}{\Omega} = \textbf{1 sidereal day} \;(\approx 23.93~\text{h}).
+\]
+The swing plane stays fixed relative to the stars while the Earth turns beneath it, so the period is one rotation of the Earth relative to the stars (a sidereal day).}
+\vspace{0.3in}
+
+
+\item If we double the length of a Foucault pendulum, what happens to its swing period? What happens to its precession period?
+\ans{\textbf{Swing period:} $T = 2\pi\sqrt{\ell/g}$, so doubling $\ell$ increases it by a factor of $\sqrt2$.
+\\[4pt]
+\textbf{Precession period:} Unchanged. $\dot\psi = -\Omega\sin\lambda$ depends only on the Earth's rotation rate and the latitude, not on $\ell$, $g$, or $m$.}
+\vspace{0.3in}
+
+\item The linearized equations of motion of the Foucault pendulum have the form $\mathbf{M}\,\ddot{\mathbf{q}} + \mathbf{C}\,\dot{\mathbf{q}} + \mathbf{K}\,\mathbf{q} = \mathbf{0}$,
+where $\mathbf{C}$ is skew-symmetric ($\mathbf{C}^T = -\mathbf{C}$). What is the work done by the Coriolis force $-\mathbf{C}\,\dot{\mathbf{q}}$? Is the energy of the Foucault pendulum conserved?
+\ans{\textbf{Zero work.} The power delivered by the Coriolis force is $P = (-\mathbf{C}\dot{\mathbf q})^T\dot{\mathbf q} = -\dot{\mathbf q}^T\mathbf{C}\,\dot{\mathbf q}$. This is a scalar, so it equals its own transpose:
+\[
+\dot{\mathbf q}^T\mathbf{C}\,\dot{\mathbf q} = \dot{\mathbf q}^T\mathbf{C}^T\dot{\mathbf q} = -\dot{\mathbf q}^T\mathbf{C}\,\dot{\mathbf q}
+\quad\Longrightarrow\quad
+\dot{\mathbf q}^T\mathbf{C}\,\dot{\mathbf q} = 0 .
+\]
+The Coriolis force is always perpendicular to the velocity, so it changes the direction of motion but never the speed.\\[4pt]
+\textbf{Yes, energy is conserved.} With $E = \tfrac12\dot{\mathbf q}^T\mathbf{M}\dot{\mathbf q} + \tfrac12\mathbf{q}^T\mathbf{K}\mathbf{q}$,
+\[
+\dot E = \dot{\mathbf q}^T\left(\mathbf{M}\ddot{\mathbf q} + \mathbf{K}\mathbf{q}\right) = -\dot{\mathbf q}^T\mathbf{C}\,\dot{\mathbf q} = 0 .
+\]
+}
+\vspace*{\fill}
+
+\end{enumerate}
+
+\end{document}
