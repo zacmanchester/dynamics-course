@@ -235,29 +235,9 @@ We'll use $T$ for kinetic energy, $U$ for potential energy, $\mathcal{L} = T - U
     \ddot\theta + \omega^2\,\theta = 0 .
     \]
 
-    \item \textbf{Natural frequency and period:} Write the natural frequency $\omega$ (in rad/s) and the period $P$ (in seconds) of small oscillations in terms of $m$, $g$, $d$, $\ell$, and $J$.
+    \item \textbf{Natural frequency and period:} Write the natural frequency $\omega$ (in rad/s) and the period $P$ (in seconds) of small oscillations in terms of $m$, $g$, $d$, $\ell$, and $J$. Using your values of $m$ and $J = J_{zz}$ from Problem 1 and $g = 981$~cm/s$^2$, compute the natural frequency $\omega$ and the period $P$ you would expect to measure.
 
     \item \textbf{Measuring the inertia:} Solve your result from part (d) for the moment of inertia $J$ as a function of the measured period $P$ and the other system parameters.
-
-\end{enumerate}
-
-\subsection*{Error Analysis}
-
-Suppose you use this setup to measure the yaw moment of inertia of the T-shaped body. You measure the string separation $2d$ and the string length $\ell$ with a ruler to within about $\pm 0.1$~cm, and you may assume $m$ and $g$ are known precisely enough that their errors are negligible. You time the oscillations with a hand-held stopwatch, which (because of your reaction time) gives an uncertainty of about $\pm 0.1$~s on each timed interval, regardless of how long the interval is. Use the nominal values $\ell = 200$~cm and $2d = 15$~cm. Denote the uncertainty in a quantity $x$ by $\sigma_x$ (e.g., $\sigma_\ell = 0.1$~cm, and since $d$ is half the measured separation, $\sigma_d = 0.05$~cm).
-
-\begin{enumerate}[label=(\alph*)]
-\setcounter{enumi}{5}
-	\item \textbf{Nominal period:} Using your values of $m$ and $J = J_{zz}$ from Problem 1 and $g = 981$~cm/s$^2$, compute the natural frequency $\omega$ and the period $P$ you would expect to measure.
-
-    \item \textbf{Error propagation:} For small errors, we can calculate the expected error in the output of a function by mapping the expected errors in the inputs through the function's derivative. If the error sources are independent, then we can combine them by adding them in quadrature (i.e., taking the root-sum-square, or RSS). For a function $z = f(x,y)$, we would have:
-    	\begin{equation*}
-    		\sigma_z = \sqrt{\left( \frac{\partial f}{\partial x} \sigma_x \right)^2+ \left( \frac{\partial f}{\partial y} \sigma_y \right)^2}
-    	\end{equation*} 
-     Using your expression for $J$ from (e), derive an expression for the uncertainty $\sigma_J$ in terms of the uncertainties $\sigma_d$, $\sigma_\ell$, and $\sigma_P$. Assume the measurement errors are independent.
-
-    \item \textbf{Timing a single period:} Suppose you time a single oscillation. Compute the contribution of each measurement to $\sigma_J$, as well as the total fractional uncertainty $\sigma_J/J$ expressed as a percentage. What is the dominant source of error?
-
-    \item \textbf{Timing 10 periods:} Now suppose you instead time 10 consecutive oscillations with the same stopwatch (so the total time is still uncertain by $\pm 0.1$~s) and divide by 10 to get $P$. Find the resulting uncertainty in $P$ and repeat your analysis from part (h). Has the dominant source of error changed?
 
 \end{enumerate}
 
