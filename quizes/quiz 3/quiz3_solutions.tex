@@ -1,0 +1,57 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=0.6in]{geometry}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+% Answer block: indented, set in a contrasting color
+\newenvironment{answer}{\par\vspace{4pt}\color{blue!60!black}\textbf{Answer:}\ }{\par\vspace{4pt}}
+
+\begin{document}
+
+\begin{center}
+    {\Large \textbf{16.07 Dynamics --- Quiz 3: Bifilar Pendulum (Solutions)}}\\[4pt]
+\end{center}
+
+\vspace{4pt}
+The questions below refer to the T-shaped body and bifilar pendulum from Problem Set 3. Recall that for small oscillations, the period of the bifilar pendulum is
+\[
+P = \frac{2\pi}{d}\sqrt{\frac{J\ell}{mg}},
+\]
+where $m$ is the mass of the body, $J$ is its moment of inertia about the vertical axis through its center of mass, $\ell$ is the string length, and $2d$ is the string separation.
+
+\vspace{10pt}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*, itemsep=4pt]
+
+\item Suppose we measure the moment of inertia of the T-shaped body about a vertical axis that does \emph{not} pass through its center of mass. Will this moment of inertia be smaller than, equal to, or larger than the value about the vertical axis through the center of mass? \emph{Hint:} think about the parallel-axis theorem.
+
+\begin{answer}
+\textbf{Larger.} By the parallel-axis theorem, the moment of inertia about a parallel axis a distance $r$ from the center of mass is $J' = J + m r^2$. Since $m r^2 > 0$ for any $r \neq 0$, $J' > J$. The axis through the center of mass gives the \emph{smallest} moment of inertia of any family of parallel axes.
+\end{answer}
+
+\item Suppose we make the T-shaped body from a material with twice the density (so that it's mass doubles), keeping everything else the same. Does its moment of inertia $J$ change? If so, by what factor? Does the period $P$ of the bifilar pendulum change?
+
+\begin{answer}
+\textbf{$J$ doubles; $P$ is unchanged.} The moment of inertia is $J = \int r^2\,dm = \int r^2 \rho\,dV$. With the shape unchanged, every mass element doubles while its distance $r$ from the axis stays the same, so $J \to 2J$. The period depends on $J$ and $m$ only through the ratio $J/m$:
+\[
+P = \frac{2\pi}{d}\sqrt{\frac{\ell}{g}\cdot\frac{J}{m}} \;\to\; \frac{2\pi}{d}\sqrt{\frac{\ell}{g}\cdot\frac{2J}{2m}} = P .
+\]
+\end{answer}
+
+\item Now suppose we double every dimension of the T-shaped body, but adjust the material density so that its mass $m$ stays the same (and keep everything else the same). By what factor does $J$ change? By what factor does the period $P$ change?
+
+\begin{answer}
+\textbf{$J$ increases by a factor of 4; $P$ doubles.} The moment of inertia scales as mass times length squared, $J \sim m L^2$. With $m$ fixed and every length doubled, every term grows by $2^2$, so $J \to 4J$. Since the strings ($d$ and $\ell$) and the mass are unchanged,
+\[
+P \propto \sqrt{\frac{J}{m}} \;\Longrightarrow\; P \to \sqrt{4}\,P = 2P .
+\]
+
+\end{answer}
+
+\end{enumerate}
+
+\end{document}
