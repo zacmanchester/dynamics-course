@@ -1,0 +1,145 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{booktabs}
+
+\title{16.07 Dynamics Problem Set 3 Solutions}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5cm}
+
+
+\section*{Problem 1: Mass Properties of a T-Shaped Body}
+
+\subsection*{(a) Mass}
+
+\[
+m = m_A + m_B = 588.8 + 384.0 = \boxed{972.8~\text{g}}
+\]
+
+\subsection*{(b) Center of mass}
+
+Measure positions along $x$ from the junction point $Q$, at the center of the face where the two boxes meet. Because each box has uniform density, its CoM is at its geometric center: $C_A$ is at $x = -4$~cm (half of box A's 8~cm width) and $C_B$ is at $x = 7.5$~cm (half of box B's 15~cm length). By symmetry, all three centers of mass lie on the $x$ axis with $y = z = 0$. The CoM of the T-shaped body is the mass-weighted average:
+\[
+x_O = \frac{m_A x_A + m_B x_B}{m} = \frac{588.8(-4) + 384.0(7.5)}{972.8} = \frac{524.8}{972.8} = 0.5395~\text{cm}.
+\]
+So $O$ lies 0.54~cm from the junction, just inside the stem. The position vectors from $O$ to the box centers of mass are
+\[
+\boxed{\mathbf{r}_1 = \begin{bmatrix} -4.539 \\ 0 \\ 0 \end{bmatrix}\text{cm}},
+\qquad
+\boxed{\mathbf{r}_2 = \begin{bmatrix} 6.961 \\ 0 \\ 0 \end{bmatrix}\text{cm}}
+\]
+
+\subsection*{(c) Inertia matrix}
+
+The parallel axis theorem shifts each box's inertia matrix from its own CoM to $O$:
+\[
+\mathbf{J} = \sum_{i}\left[ \mathbf{J}_i - m_i S(\mathbf{r}_i)^2 \right].
+\]
+The shifted matrices of the two boxes about $O$ are
+\begin{gather*}
+\mathbf{J}_A^{(O)} = \begin{bmatrix} 27{,}180 & 0 & 0 \\ 0 & 4{,}367 + 12{,}133 & 0 \\ 0 & 0 & 29{,}100 + 12{,}133 \end{bmatrix},
+\\[4pt]
+\mathbf{J}_B^{(O)} = \begin{bmatrix} 2{,}848 & 0 & 0 \\ 0 & 8{,}000 + 18{,}604 & 0 \\ 0 & 0 & 9{,}248 + 18{,}604 \end{bmatrix},
+\end{gather*}
+in g\,cm$^2$. Adding them,
+\[
+\boxed{\mathbf{J} = \begin{bmatrix} 30{,}028 & 0 & 0 \\ 0 & 43{,}105 & 0 \\ 0 & 0 & 69{,}086 \end{bmatrix}~\text{g\,cm}^2
+\approx \begin{bmatrix} 3.003 & 0 & 0 \\ 0 & 4.310 & 0 \\ 0 & 0 & 6.909 \end{bmatrix}\times10^4~\text{g\,cm}^2}
+\]
+
+\section*{Problem 2: The Bifilar Pendulum}
+
+\subsection*{Equations of Motion}
+
+\subsubsection*{(a) Geometry and energies}
+
+In the top view, the two ends of a string and the axis form an isosceles triangle with two sides of length $d$ and an included angle $\theta$. The third side is the horizontal displacement $s$, so by the law of cosines
+\[
+s^2 = d^2 + d^2 - 2d^2\cos\theta = 2d^2(1-\cos\theta),
+\qquad\text{equivalently}\qquad
+s = 2d\sin(\theta/2).
+\]
+Each string has fixed length $\ell$ and horizontal extent $s$, so its vertical extent is $\sqrt{\ell^2 - s^2}$. At rest the vertical extent is $\ell$, so the body rises by
+\[
+\boxed{h(\theta) = \ell - \sqrt{\ell^2 - 2d^2(1-\cos\theta)}}
+\]
+Taking the rest position as the reference, the potential energy is $U = mgh(\theta)$. The body rotates about the vertical axis at rate $\dot\theta$ and translates vertically at rate
+\[
+\dot h = \frac{dh}{d\theta}\,\dot\theta = \frac{d^2\sin\theta}{\sqrt{\ell^2 - 2d^2(1-\cos\theta)}}\,\dot\theta ,
+\]
+so the kinetic energy is
+\[
+T = \frac12 J\dot\theta^2 + \frac12 m\dot h^2
+  = \frac12\left[J + \frac{m d^4\sin^2\theta}{\ell^2 - 2d^2(1-\cos\theta)}\right]\dot\theta^2 .
+\]
+The exact Lagrangian is
+\[
+\boxed{\mathcal{L}(\theta,\dot\theta) = \frac12\left[J + \frac{m d^4\sin^2\theta}{\ell^2 - 2d^2(1-\cos\theta)}\right]\dot\theta^2
+ - mg\left(\ell - \sqrt{\ell^2 - 2d^2(1-\cos\theta)}\right)}
+\]
+
+\subsubsection*{(b) Small-angle expansion}
+
+Expanding $1 - \cos\theta = \tfrac12\theta^2 - \tfrac1{24}\theta^4 + \cdots$ gives $s^2 = d^2\theta^2 + \mathcal{O}(\theta^4)$, and then
+\[
+\sqrt{\ell^2 - s^2} = \ell\sqrt{1 - \frac{s^2}{\ell^2}} = \ell - \frac{s^2}{2\ell} + \mathcal{O}(s^4),
+\qquad
+h \approx \frac{d^2\theta^2}{2\ell},
+\qquad
+U \approx \frac{mgd^2}{2\ell}\,\theta^2 .
+\]
+In the kinetic energy, the rotational term $\tfrac12 J\dot\theta^2$ is already quadratic. The vertical-translation term is
+\[
+\frac12 m\dot h^2 \approx \frac12\,\frac{m d^4}{\ell^2}\,\theta^2\dot\theta^2 ,
+\]
+which is \emph{fourth} order in the small quantities, so it drops out. Physically, the body's height changes only at second order in $\theta$, so its vertical velocity is itself second order ($\dot h \propto \theta\dot\theta$), and the kinetic energy of that motion is fourth order. The surviving quadratic Lagrangian is
+\[
+\boxed{\mathcal{L}_2 = \frac12 J\dot\theta^2 - \frac{mgd^2}{2\ell}\,\theta^2}
+\]
+
+\subsubsection*{(c) Linearized equation of motion}
+
+With $\partial\mathcal{L}_2/\partial\dot\theta = J\dot\theta$ and $\partial\mathcal{L}_2/\partial\theta = -mgd^2\theta/\ell$, the Euler--Lagrange equation
+\[
+\frac{d}{dt}\left(\frac{\partial\mathcal{L}_2}{\partial\dot\theta}\right) - \frac{\partial\mathcal{L}_2}{\partial\theta} = 0
+\]
+gives
+\[
+J\ddot\theta + \frac{mgd^2}{\ell}\,\theta = 0
+\qquad\Longrightarrow\qquad
+\boxed{\ddot\theta + \frac{mgd^2}{J\ell}\,\theta = 0}
+\]
+
+\subsubsection*{(d) Natural frequency and period}
+
+Reading off the coefficient of $\theta$ in the equation of motion,
+\[
+\boxed{\omega = d\sqrt{\frac{mg}{J\ell}}},
+\qquad
+\boxed{P = \frac{2\pi}{\omega} = \frac{2\pi}{d}\sqrt{\frac{J\ell}{mg}}}
+\]
+For the T-shaped body, with $m = 972.8$~g and $J = J_{zz} = 69{,}086$~g\,cm$^2$ from Problem 1, $g = 981$~cm/s$^2$, $\ell = 200$~cm, and $d = 7.5$~cm:
+\[
+\omega = 7.5\sqrt{\frac{972.8 \times 981}{69{,}086 \times 200}} = \boxed{1.971~\text{rad/s}},
+\qquad
+P = \frac{2\pi}{\omega} = \boxed{3.188~\text{s}}
+\]
+
+\subsubsection*{(e) Measuring the inertia}
+
+Squaring the expression for $P$ from part (d) and solving for $J$:
+\[
+P^2 = \frac{4\pi^2}{d^2}\,\frac{J\ell}{mg}
+\qquad\Longrightarrow\qquad
+\boxed{J = \frac{mgd^2P^2}{4\pi^2\ell}}
+\]
+
+\end{document}
