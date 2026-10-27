@@ -1,0 +1,264 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\title{16.07 Dynamics Problem Set 4 \\ \large Solutions}
+\author{}
+\date{}
+
+% vector / matrix shorthands
+\newcommand{\bw}{\boldsymbol{\omega}}
+\newcommand{\bwd}{\boldsymbol{\omega}_d}
+\newcommand{\bh}{\mathbf{h}}
+\newcommand{\Bw}{{}^{B}\boldsymbol{\omega}}
+\newcommand{\Bwd}{{}^{B}\boldsymbol{\omega}_d}
+\newcommand{\Nwd}{{}^{N}\boldsymbol{\omega}_d}
+\newcommand{\Bh}{{}^{B}\mathbf{h}}
+\newcommand{\Bhd}{{}^{B}\mathbf{h}_d}
+\newcommand{\Nh}{{}^{N}\mathbf{h}}
+\newcommand{\Nhd}{{}^{N}\mathbf{h}_d}
+\newcommand{\Nht}{{}^{N}\mathbf{h}_{\text{tot}}}
+\newcommand{\Bht}{{}^{B}\mathbf{h}_{\text{tot}}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\btau}{\boldsymbol{\tau}}
+\newcommand{\bsig}{\boldsymbol{\sigma}}
+\newcommand{\htot}{\lVert\bh_{\text{tot}}\rVert}
+
+\lstset{basicstyle=\ttfamily\footnotesize, columns=fullflexible, keepspaces=true,
+        frame=single, rulecolor=\color{gray!50}, commentstyle=\color{gray},
+        keywordstyle=\color{blue!60!black}, language=Python, breaklines=true}
+
+\begin{document}
+
+\maketitle
+
+\noindent Throughout, all angular velocities without a frame superscript in an equation are understood to be $B$-frame components, and we use the shorthand
+\[
+\bsig \equiv \Bwd - \Bw
+\]
+for the angular velocity of the damper relative to the body.
+
+\section{Deriving Equations of Motion}
+
+\subsection*{(a) Angular momenta}
+
+The body's inertia matrix is constant in $B$, so its angular momentum is simplest in $B$-frame components, and $\bQ$ rotates it into $N$:
+\[
+\Bh = \bJ\,\Bw, \qquad \Nh = \bQ\,\Bh = \bQ\,\bJ\,\Bw .
+\]
+The damper's inertia matrix is $J_d\mathbf{I}$ in every frame, so its angular momentum is just $J_d$ times its angular velocity, whichever frame we write the components in:
+\[
+\Bhd = J_d\,\Bwd, \qquad \Nhd = J_d\,\Nwd = \bQ\,J_d\,\Bwd .
+\]
+
+\subsection*{(b) Transport theorem}
+
+Applying ${}^{N}\dot{\mathbf{v}} = \bQ\left({}^{B}\dot{\mathbf{v}} + \Bw \times {}^{B}\mathbf{v}\right)$ with $\mathbf{v} = \bh$, and using the fact that $\bJ$ is constant:
+\[
+{}^{N}\dot\bh = \bQ\left(\bJ\,{}^{B}\dot\bw + \Bw\times\bJ\,\Bw\right).
+\]
+For the damper, with $\mathbf{v} = \bh_d$:
+\[
+{}^{N}\dot\bh_d = \bQ\,J_d\left({}^{B}\dot\bw_d + \Bw\times\Bwd\right).
+\]
+The cross product involves $\Bw$, not $\Bwd$, because $\Bw$ is the rotation rate of the frame in which we are taking components. The damper is not fixed in $B$, but we are still differentiating its $B$-frame components.
+
+\subsection*{(c) Damper torques}
+
+\paragraph{Why the torque drives co-rotation.} The torque on the body, $C_d\left(\Bwd - \Bw\right)$ and the reaction torque on the damper, $-C_d\left(\Bwd - \Bw\right)$, oppose relative motion between the two bodies. They tend to drive relative velocity $\left(\Bwd - \Bw\right)$ to zero.
+
+\paragraph{Equations of motion.} In the $N$ frame, we have ${}^{N}\dot\bh = {}^{N}\btau = \bQ\,{}^{B}\btau$ and ${}^{N}\dot\bh_d = -\bQ\,{}^{B}\btau$. Substituting the results of part (b) and multiplying through by $\bQ^{-1} = \bQ^T$:
+\begin{align*}
+\bJ\,{}^{B}\dot\bw + \Bw\times\bJ\,\Bw &= C_d\left(\Bwd - \Bw\right), \\
+J_d\left({}^{B}\dot\bw_d + \Bw\times\Bwd\right) &= -C_d\left(\Bwd - \Bw\right).
+\end{align*}
+Solving for the derivatives gives the coupled ODEs:
+\[
+\boxed{
+\begin{aligned}
+{}^{B}\dot\bw &= \bJ^{-1}\left[-\Bw\times\bJ\,\Bw + C_d\left(\Bwd - \Bw\right)\right] \\[3pt]
+{}^{B}\dot\bw_d &= -\Bw\times\Bwd - \frac{C_d}{J_d}\left(\Bwd - \Bw\right)
+\end{aligned}}
+\]
+
+\subsection*{(d) Angular momentum conservation}
+
+Adding the two equations from part (c) before solving for the derivatives, and multiplying by $\bQ$:
+\[
+{}^{N}\dot\bh + {}^{N}\dot\bh_d
+= \bQ\left[\bJ\,{}^{B}\dot\bw + \Bw\times\bJ\,\Bw + J_d\left({}^{B}\dot\bw_d + \Bw\times\Bwd\right)\right]
+= \bQ\left[C_d\,\bsig - C_d\,\bsig\right] = \mathbf{0}.
+\]
+So ${}^{N}\dot\bh_{\text{tot}} = \mathbf{0}$, and $\Nht$ is constant. The damper torques are internal to the system: by Newton's 3rd law they appear in equal and opposite pairs and cancel in the sum. The damper can exchange angular momentum between the body and the sphere, but it can't change the total.
+
+\subsection*{(e) Energy dissipation}
+
+Rotational kinetic energy doesn't depend on which frame we use for components ($\lVert\bQ\mathbf{v}\rVert = \lVert\mathbf{v}\rVert$), so we can write everything in $B$:
+\[
+T = \tfrac12\,\Bw^T\bJ\,\Bw + \tfrac12\,J_d\,\Bwd^T\Bwd .
+\]
+Differentiating w.r.t. time,
+\[
+\dot T = \Bw^T\bJ\,{}^{B}\dot\bw + J_d\,\Bwd^T\,{}^{B}\dot\bw_d .
+\]
+Substituting the equations of motion:
+\begin{align*}
+\Bw^T\bJ\,{}^{B}\dot\bw &= \Bw\cdot\left(-\Bw\times\bJ\,\Bw\right) + C_d\,\Bw\cdot\bsig = C_d\,\Bw\cdot\bsig, \\
+J_d\,\Bwd^T\,{}^{B}\dot\bw_d &= -J_d\,\Bwd\cdot\left(\Bw\times\Bwd\right) - C_d\,\Bwd\cdot\bsig = -C_d\,\Bwd\cdot\bsig,
+\end{align*}
+where both triple products vanish by the hint, since each has a repeated vector. Adding,
+\[
+\dot T = -C_d\left(\Bwd - \Bw\right)\cdot\bsig = -C_d\,\lVert\Bwd - \Bw\rVert^2 \le 0 .
+\]
+This is the power dissipated in the fluid. Energy decreases whenever the damper and body rotate at different rates.
+
+\subsection*{(f) Final state}
+
+$T$ is bounded below by zero and never increases, so it approaches a limit and $\dot T \to 0$. In any motion where $T$ stays constant, $\bsig(t) \equiv \mathbf{0}$, so also $\dot\bsig \equiv \mathbf{0}$, i.e., ${}^{B}\dot\bw_d = {}^{B}\dot\bw$. Substituting $\Bwd = \Bw$ into the damper equation gives
+\[
+J_d\left({}^{B}\dot\bw + \Bw\times\Bw\right) = J_d\,{}^{B}\dot\bw = \mathbf{0},
+\]
+so $\Bw$ is constant. Then the body equation reduces to
+\[
+\Bw\times\bJ\,\Bw = \mathbf{0},
+\]
+so $\bJ\,\Bw$ is parallel to $\Bw$. That means $\Bw$ is an eigenvector of $\bJ$: the body spins steadily about a principal axis, with the damper locked in co-rotation.
+
+\paragraph{Energy of each pure spin.} For pure spin at rate $\Omega_i$ about principal axis $i$ with the damper co-rotating,
+\[
+\htot = \left(J_i + J_d\right)\lvert\Omega_i\rvert, \qquad
+T_i = \tfrac12\left(J_i + J_d\right)\Omega_i^2 = \frac{\htot^2}{2\left(J_i + J_d\right)} .
+\]
+Since $\htot$ is fixed, $T_i$ is smallest for the largest moment of inertia, the major axis $\hat b_3$.
+
+\paragraph{Final State.} Spin about the minor and intermediate axes are equilibria, but neither is a minimum of $T$ at fixed $\htot$. Any small disturbance produces some relative motion $\bsig \neq \mathbf{0}$, which removes energy, and the energy can never come back. The only state from which the damper cannot remove energy, and which nearby trajectories approach, is the energy minimum. Therefore, from any initial condition, the body ends up in steady spin about its major axis $\hat b_3$ at rate
+\[
+\lvert\omega_3\rvert = \frac{\htot}{J_3 + J_d},
+\]
+with the damper co-rotating and $\hat b_3$ aligned with the fixed inertial vector $\Nht$. This is why passively spin-stabilized spacecraft are designed to spin about their major axis.
+
+\section{Simulation}
+
+\subsection*{(a) Attitude kinematics}
+
+Differentiating $\bQ^T\bQ$ and substituting $\dot\bQ = \bQ\,S(\Bw)$:
+\[
+\frac{d}{dt}\left(\bQ^T\bQ\right) = \dot\bQ^T\bQ + \bQ^T\dot\bQ
+= S(\Bw)^T\,\bQ^T\bQ + \bQ^T\bQ\,S(\Bw).
+\]
+If $\bQ^T\bQ = \mathbf{I}$, this is $S(\Bw)^T + S(\Bw) = \mathbf{0}$, because $S$ is skew-symmetric. So $\bQ^T\bQ = \mathbf{I}$ is constant.
+
+\subsection*{(b) First-order ODE}
+
+With $\bx = \left[\operatorname{vec}(\bQ);\ \Bw;\ \Bwd\right]$,
+\[
+\dot\bx = \mathbf{f}(\bx) =
+\begin{bmatrix}
+\operatorname{vec}\!\left(\bQ\,S(\Bw)\right) \\[3pt]
+\bJ^{-1}\left[-\Bw\times\bJ\,\Bw + C_d\left(\Bwd - \Bw\right)\right] \\[3pt]
+-\Bw\times\Bwd - \dfrac{C_d}{J_d}\left(\Bwd - \Bw\right)
+\end{bmatrix}.
+\]
+Note the structure: the last six rows depend only on $\Bw$ and $\Bwd$, not on $\bQ$. The angular-velocity dynamics are self-contained, and they drive the attitude. A reference Python implementation is given in the Appendix.
+
+\subsection*{(c) Simulation}
+
+Each run uses $\bQ(0) = \mathbf{I}$, $\Omega = 2$~rad/s, $\epsilon = 10^{-3}$~rad/s, and tolerances of $10^{-8}$ over $t \in [0, 900]$~s. Table~\ref{tab:final} compares the final states with the predictions of Section~1(f). The final spin rate and the fraction of energy remaining, $(J_k + J_d)/(J_3 + J_d)$, match to all digits shown.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{lccccc}
+\toprule
+ & $\htot$ & \multicolumn{2}{c}{Final $\omega_3$ (rad/s)} & \multicolumn{2}{c}{$T(t_f)/T(0)$} \\
+Run (initial axis) & (g\,cm$^2$/s) & predicted & simulated & predicted & simulated \\
+\midrule
+1 (minor, $\hat b_1$)        & 66\,096  & 0.9169 & 0.9169 & 0.4582 & 0.4582 \\
+2 (intermediate, $\hat b_2$) & 92\,249  & 1.2796 & 1.2796 & 0.6395 & 0.6395 \\
+3 (major, $\hat b_3$)        & 144\,255 & 2.0010 & 2.0010 & 1.0000 & 1.0000 \\
+\bottomrule
+\end{tabular}
+\caption{Final states after 900~s. Predictions use $\omega_3 = \htot/(J_3 + J_d)$ and $T_f/T_0 = (J_k + J_d)/(J_3 + J_d)$. The $\epsilon$ perturbation is included in $\htot$, which is why run 3 ends slightly above $\Omega = 2$~rad/s.}
+\label{tab:final}
+\end{table}
+
+\subsection*{(d) Momentum and energy}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{fig_runs.pdf}
+\caption{Top: inertial components of the total angular momentum and its magnitude. Middle: body-frame angular velocity. Bottom: kinetic energy, normalized by its initial value. Columns are the three runs.}
+\label{fig:runs}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{fig_energy.pdf}
+\caption{Normalized energy $2T/\htot^2$ for all three runs. Dotted lines mark pure spin about each principal axis, $1/(J_i + J_d)$, from Section~1(f).}
+\label{fig:energy}
+\end{figure}
+
+\paragraph{Angular momentum.} In every run, the components of $\Nht$ are constant (Fig.~\ref{fig:runs}, top row): $\htot$ varies by about $2\times10^{-8}$ relative to its initial value, consistent with the integration tolerance. Because $\bQ(0) = \mathbf{I}$, $\Nht$ starts (and stays) nearly along $\hat n_k$ for run $k$.
+
+\paragraph{Energy.} All three runs end at the same normalized energy, $1/(J_3 + J_d)$, the global minimum (Fig.~\ref{fig:energy}). The final body rates are pure $\hat b_3$ spin (Fig.~\ref{fig:runs}, middle row), and the third column of $\bQ(t_f)$ is $\hat n_1$ in run 1 and $\hat n_2$ in run 2. That is, the body has physically turned so that its major axis lines up with the fixed angular momentum vector.
+
+\paragraph{Run 1 (minor axis).} For the first $\sim$200~s, the body appears to spin steadily about $\hat b_1$. But the small nutation ($\omega_2$, $\omega_3$) is slowly \emph{growing}: minor-axis spin is stable without damping, but the damper turns it unstable. Each cycle of nutation drives the damper relative to the body and removes energy, and at fixed $\htot$ lower energy means wider nutation. The growth is exponential, so it's invisible at first and then rapid. Near $t \approx 336$~s, the energy drops through the intermediate-axis level. At that moment the motion changes character: instead of coning about $\hat b_1$, the angular velocity now cones about $\hat b_3$, and $\omega_1$ starts oscillating about zero instead of $\omega_3$. After this crossing, the damper removes the remaining nutation about $\hat b_3$, and the body settles into pure major-axis spin by $t \approx 450$~s, having lost 54\% of its kinetic energy.
+
+\paragraph{Run 2 (intermediate axis).} Intermediate-axis spin is unstable even without damping. The undamped linearized growth rate is
+\[
+\Omega\sqrt{\frac{(J_3 - J_2)(J_2 - J_1)}{J_1 J_3}} \approx 0.81~\text{s}^{-1},
+\]
+so the $10^{-3}$ perturbation reaches order one within about 10~s. The body then tumbles, with $\omega_2$ flipping sign repeatedly. Without the damper, it would keep flipping forever. With the damper, each flip removes energy, the energy drops below the intermediate-axis level almost immediately, and the motion becomes coning about $\hat b_3$ that decays to pure major-axis spin by $t \approx 125$~s.
+
+\paragraph{Run 3 (major axis).} This run starts at the energy minimum, so there is nothing for the damper to remove except the tiny energy in the $\epsilon$ perturbation. The nutation decays, and $T$ falls by only about $2\times10^{-7}$ of its initial value. Major-axis spin is asymptotically stable.
+
+\paragraph{A note on sign.} In all three runs, the final spin is about $+\hat b_3$, but spin about $-\hat b_3$ has exactly the same energy. Which one the body reaches depends on the details of the initial perturbation.
+
+\subsection*{(e) Orthogonality of $\bQ$}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{fig_orth.pdf}
+\caption{Orthogonality and determinant errors of the numerical $\bQ$. Solid: all three runs at tolerance $10^{-8}$ (they nearly overlap). Dashed: run 1 with the integrator defaults (\texttt{rtol} $=10^{-3}$, \texttt{atol} $=10^{-6}$).}
+\label{fig:orth}
+\end{figure}
+
+At tolerance $10^{-8}$, both $\lVert\bQ^T\bQ - \mathbf{I}\rVert_F$ and $\lvert\det\bQ - 1\rvert$ grow steadily to a few times $10^{-5}$ over 900~s. With the default tolerances, they grow to about $10^{-1}$: by the end of run 1, the first two columns of $\bQ$ have stretched by about 4\%, and $\bQ$ is visibly not a rotation matrix.
+
+\paragraph{Why the constraint isn't preserved.} A Runge--Kutta step updates $\bQ$ as
+\[
+\bQ_{n+1} = \bQ_n + \Delta t\sum_i b_i\,\mathbf{K}_i,
+\]
+a linear combination of matrices that treats the nine entries of $\bQ$ as unconstrained numbers. The set of rotation matrices is curved (it's defined by the \emph{quadratic} constraint $\bQ^T\bQ = \mathbf{I}$), so a straight-line step tangent to it leaves it, and each step's truncation error has a component off the constraint. Part (a) showed that the exact flow preserves $\bQ^T\bQ$, but it doesn't push errors back toward $\mathbf{I}$ either. The errors are neither damped nor corrected, so they accumulate over the run.
+
+\paragraph{Effect on $\Bw$, $\Bwd$, and $\Nht$.} The $\bw$ and $\bwd$ rows of $\mathbf{f}(\bx)$ don't depend on $\bQ$ (part (b)), so drift in $\bQ$ cannot feed back into the angular velocities. Their trajectories are exactly what they would be without integrating $\bQ$ at all, apart from their own truncation error. (With the default tolerances, $\Bw(t_f)$ differs from the tight-tolerance result by about $10^{-4}$~rad/s, and $\lVert\Bht\rVert$ drifts by about $10^{-4}$ relative. Both come from integrating $\bw$ and $\bwd$ loosely, not from $\bQ$.)
+
+The inertial momentum $\Nht = \bQ\,\Bht$, however, \emph{is} computed with $\bQ$. If $\bQ$ isn't orthogonal, it stretches and shears $\Bht$, so the computed $\Nht$ is no longer constant, even though the true one is. With the default tolerances, the computed $\Nht$ wanders by up to 0.5\% during run 1 and ends up rotated by about $0.14^\circ$. That error is smaller than you might expect from $\lVert\bQ^T\bQ - \mathbf{I}\rVert_F \approx 0.1$, because after capture $\Bht$ lies along $\hat b_3$, and the third column of $\bQ$ stays nearly unit length; most of the drift is in the first two columns. For a general motion, the error in $\Nht$ would be of the same order as the error in $\bQ$.
+
+\paragraph{Keeping $\bQ$ a rotation.} Any of the following works:
+\begin{itemize}
+    \item \textbf{Re-orthonormalize} periodically (every step, or whenever the error exceeds a threshold). For example, take the SVD $\bQ = \mathbf{U}\boldsymbol{\Sigma}\mathbf{V}^T$ and replace $\bQ \leftarrow \mathbf{U}\mathbf{V}^T$, the nearest rotation matrix in the Frobenius norm. Gram--Schmidt on the columns also works.
+    \item \textbf{Use a Lie-group integrator} that updates by a rotation, e.g., $\bQ_{k+1} = \bQ_k\exp\!\left(S(\Bw)\,\Delta t\right)$, with the matrix exponential. The product of rotations is exactly a rotation, up to round-off.
+    \item \textbf{Add constraint stabilization}, e.g., $\dot\bQ = \bQ\,S(\Bw) + \tfrac{k}{2}\,\bQ\left(\mathbf{I} - \bQ^T\bQ\right)$ with $k > 0$. This term vanishes on the constraint but drives $\bQ^T\bQ$ back toward $\mathbf{I}$ when it drifts.
+    \item \textbf{Use a different attitude representation}, e.g., unit quaternions, and renormalize to unit length. One scalar constraint is much easier to enforce than six.
+\end{itemize}
+
+\appendix
+\section*{Appendix: Reference Implementation}
+
+\lstinputlisting{kane_sim.py}
+
+\noindent Usage: \texttt{t, y = run(k)} integrates run $k \in \{0, 1, 2\}$ (axes $\hat b_1$, $\hat b_2$, $\hat b_3$), and \texttt{diagnostics(y)} returns $\bQ$, $\Bw$, $\Bwd$, $\Bht$, $\Nht$, $T$, and the orthogonality errors along the trajectory. Use \texttt{run(k, rtol=1e-3, atol=1e-6)} for the default-tolerance comparison.
+
+\end{document}
