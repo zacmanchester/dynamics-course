@@ -1,4 +1,4 @@
-d% QUADROTOR_KEYBOARD  Real-time keyboard-controlled quadrotor simulation.
+% QUADROTOR_KEYBOARD  Real-time keyboard-controlled quadrotor simulation.
 %
 % Controls (hold keys):
 %   Up / Down arrows    : +x / -x world-frame reference velocity
