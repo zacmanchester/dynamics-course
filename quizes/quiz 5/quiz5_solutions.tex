@@ -1,0 +1,72 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=0.6in]{geometry}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+% Answer block, set in a contrasting color
+\newenvironment{answer}{\par\vspace{4pt}\color{blue!60!black}\textbf{Answer:}\ }{\par\vspace{4pt}}
+
+\begin{document}
+
+\begin{center}
+    {\Large \textbf{16.07 Dynamics --- Quiz 5: Error Analysis and Quaternions}}\\[4pt]
+    {\large \textbf{Answer Key}}
+\end{center}
+
+\vspace{10pt}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*, itemsep=4pt]
+
+\item To measure the period $P$ of the bifilar pendulum, you could either (i) time 10 consecutive oscillations in a single interval and divide by 10, or (ii) time a single oscillation 10 separate times and average the results. If each timed interval has an uncertainty of $\pm 0.1$~s, what is the uncertainty in $P$ for each approach? Which approach is better?
+
+\begin{answer}
+\textbf{(i) $\sigma_P = 0.01$~s; (ii) $\sigma_P \approx 0.032$~s. Approach (i) is about $3\times$ better.}
+
+(i) The $\pm0.1$~s reaction-time error applies to the whole interval, however long it is. Dividing the total time by 10 divides its error by 10 as well:
+\[
+\sigma_P = \frac{0.1~\text{s}}{10} = 0.01~\text{s}.
+\]
+(ii) Each single-period timing has $\sigma = 0.1$~s. Averaging $N = 10$ independent measurements reduces the uncertainty of the mean only by $\sqrt{N}$:
+\[
+\sigma_P = \frac{0.1~\text{s}}{\sqrt{10}} \approx 0.032~\text{s}.
+\]
+Timing many periods in one interval improves as $1/N$, while averaging separate timings improves only as $1/\sqrt{N}$. For the same 10 oscillations of effort, (i) wins by a factor of $\sqrt{10} \approx 3.2$. (In practice, you can do both: time several 10-period intervals and average them, as in lab.)
+\end{answer}
+
+\item A rotation matrix $\mathbf{Q}$ has 9 entries, and a quaternion $\mathbf{q}$ has 4. How many independent constraints must each satisfy to represent a valid rotation? How many degrees of freedom remain in each case?
+
+\begin{answer}
+\textbf{$\mathbf{Q}$: 6 constraints; $\mathbf{q}$: 1 constraint. Both leave 3 degrees of freedom.}
+
+A rotation matrix must satisfy $\mathbf{Q}^{T}\mathbf{Q} = \mathbf{I}$. Because $\mathbf{Q}^{T}\mathbf{Q}$ is symmetric, only its 6 upper-triangular entries give independent equations: each of the 3 columns has unit length (3 constraints), and the columns are mutually orthogonal (3 constraints). That leaves $9 - 6 = 3$ degrees of freedom. The condition $\det\mathbf{Q} = +1$ excludes reflections but does not remove a degree of freedom.
+
+A unit quaternion must satisfy only $\lVert\mathbf{q}\rVert = 1$, a single constraint, leaving $4 - 1 = 3$ degrees of freedom.
+
+Both match the 3 degrees of freedom of a rigid-body rotation. The quaternion is more compact and has only one constraint to maintain numerically.
+\end{answer}
+
+\item Because of numerical drift, the quaternion in your simulation has norm $\lVert\mathbf{q}\rVert = 1.01$. If you compute the rotation matrix $\mathbf{Q}(\mathbf{q}) = H^{T}L(\mathbf{q})\,R(\mathbf{q})^{T}H$ and apply it to a vector, what happens to that vector? How would you fix this? \emph{Hint:} $L(\mathbf{q})^{T}L(\mathbf{q}) = R(\mathbf{q})^{T}R(\mathbf{q}) = \lVert\mathbf{q}\rVert^2\,\mathbf{I}_4$.
+
+\begin{answer}
+\textbf{The vector is rotated correctly but stretched by about 2\%. Fix it by renormalizing $\mathbf{q}$.}
+
+Write $\mathbf{q} = \lVert\mathbf{q}\rVert\,\hat{\mathbf{q}}$, where $\hat{\mathbf{q}}$ is a unit quaternion. Since $L$ and $R$ are linear in $\mathbf{q}$, $\mathbf{Q}(\mathbf{q})$ is quadratic in $\mathbf{q}$:
+\[
+\mathbf{Q}(\mathbf{q}) = \lVert\mathbf{q}\rVert^2\,\mathbf{Q}(\hat{\mathbf{q}}),
+\]
+where $\mathbf{Q}(\hat{\mathbf{q}})$ is a true rotation matrix. Equivalently, using the hint, $\mathbf{Q}(\mathbf{q})^{T}\mathbf{Q}(\mathbf{q}) = \lVert\mathbf{q}\rVert^4\,\mathbf{I}$. So $\mathbf{Q}(\mathbf{q})$ rotates the vector in the right direction, but multiplies its length by
+\[
+\lVert\mathbf{q}\rVert^2 = 1.01^2 \approx 1.02 .
+\]
+A 1\% norm error in $\mathbf{q}$ becomes a 2\% length error in every rotated vector. In the Kane damper simulation, for example, $\lVert{}^{N}\mathbf{h}_{\text{tot}}\rVert$ computed this way would appear to grow by 2\% even though angular momentum is conserved.
+
+\textbf{Fix:} renormalize, $\mathbf{q} \leftarrow \mathbf{q}/\lVert\mathbf{q}\rVert$, periodically during the simulation (or before computing $\mathbf{Q}(\mathbf{q})$). This is much simpler than re-orthogonalizing a drifted $3\times3$ rotation matrix.
+\end{answer}
+
+\end{enumerate}
+
+\end{document}

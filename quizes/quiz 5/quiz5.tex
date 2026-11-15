@@ -1,0 +1,34 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=0.6in]{geometry}
+\usepackage{enumitem}
+\usepackage{amsmath}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\begin{center}
+    {\Large \textbf{16.07 Dynamics --- Quiz 5: Error Analysis and Quaternions}}
+\end{center}
+
+\vspace{4pt}
+
+Name: \rule{3.2in}{0.4pt}
+
+\vspace{14pt}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*, itemsep=4pt, series=quiz]
+
+\item To measure the period $P$ of the bifilar pendulum, you could either (i) time 10 consecutive oscillations in a single interval and divide by 10, or (ii) time a single oscillation 10 separate times and average the results. If each timed interval has an uncertainty of $\pm 0.1$~s, what is the uncertainty in $P$ for each approach? Which approach is better?
+\vspace{2.0in}
+
+\item A rotation matrix $\mathbf{Q}$ has 9 entries, and a quaternion $\mathbf{q}$ has 4. How many independent constraints must each satisfy to represent a valid rotation? How many degrees of freedom remain in each case?
+\vspace{2.0in}
+
+\item Because of numerical drift, the quaternion in your simulation has norm $\lVert\mathbf{q}\rVert = 1.01$. If you compute the rotation matrix $\mathbf{Q}(\mathbf{q}) = H^{T}L(\mathbf{q})\,R(\mathbf{q})^{T}H$ and apply it to a vector, what happens to that vector? How would you fix this? \emph{Hint:} $L(\mathbf{q})^{T}L(\mathbf{q}) = R(\mathbf{q})^{T}R(\mathbf{q}) = \lVert\mathbf{q}\rVert^2\,\mathbf{I}_4$.
+\vspace*{\fill}
+
+\end{enumerate}
+
+\end{document}
