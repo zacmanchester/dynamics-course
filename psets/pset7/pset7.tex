@@ -203,11 +203,11 @@ r_1 = \sqrt{(x+\mu)^2 + y^2 + z^2}, \qquad r_2 = \sqrt{(x-1+\mu)^2 + y^2 + z^2}.
     \[
     \mathcal{L} = \mathcal{L}_2 + \mathcal{L}_1 + \mathcal{L}_0,
     \]
-    where $\mathcal{L}_2$ is quadratic in the velocities, $\mathcal{L}_1$ is linear in them, and $\mathcal{L}_0$ doesn't depend on them at all. Show that $\mathcal{L}_0$ can be written as $\mathcal{L}_0 = U(x,y,z)$, where
+    where $\mathcal{L}_2$ is quadratic in the velocities, $\mathcal{L}_1$ is linear in them, and $\mathcal{L}_0$ doesn't depend on them at all. Show that $\mathcal{L}_0$ can be written as $\mathcal{L}_0 = -U(x,y,z)$, where
     \[
-    U(x, y, z) = \frac12\left(x^2 + y^2\right) + \frac{1-\mu}{r_1} + \frac{\mu}{r_2}
+    U(x, y, z) = -\frac12\left(x^2 + y^2\right) - \frac{1-\mu}{r_1} - \frac{\mu}{r_2}
     \]
-    is called the \emph{effective potential}. (Note the sign convention: $-U$ plays the role of a potential energy.) Where does the $\frac12(x^2 + y^2)$ term come from physically?
+    is called the \emph{effective potential}. It plays the role of a potential energy in the rotating frame, so that $\mathcal{L} = \mathcal{L}_2 + \mathcal{L}_1 - U$. Where does the $-\frac12(x^2 + y^2)$ term come from physically?
 
     \item \textbf{Equations of motion:} Apply the Euler--Lagrange equation
     \[
@@ -215,9 +215,9 @@ r_1 = \sqrt{(x+\mu)^2 + y^2 + z^2}, \qquad r_2 = \sqrt{(x-1+\mu)^2 + y^2 + z^2}.
     \]
     to each of $q_j = x, y, z$, and show that the equations of motion are
     \[
-    \ddot x - 2\dot y = \frac{\partial U}{\partial x}, \qquad
-    \ddot y + 2\dot x = \frac{\partial U}{\partial y}, \qquad
-    \ddot z = \frac{\partial U}{\partial z}.
+    \ddot x - 2\dot y = -\frac{\partial U}{\partial x}, \qquad
+    \ddot y + 2\dot x = -\frac{\partial U}{\partial y}, \qquad
+    \ddot z = -\frac{\partial U}{\partial z}.
     \]
     Then write out the three partial derivatives of $U$ explicitly.
 
